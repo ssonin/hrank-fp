@@ -23,6 +23,19 @@ object Introduction extends App {
     go(x => x < delim, List.empty, numbers).reverse
   }
 
+  def filterPos(numbers: List[Int]): List[Int] = {
+    @tailrec
+    def go(numbers: List[Int], acc: List[Int], keepHead: Boolean): List[Int] = {
+      if (numbers.isEmpty) acc
+      else {
+        if (keepHead) go(numbers.tail, numbers.head :: acc, false)
+        else go(numbers.tail, acc, true)
+      }
+    }
+
+    go(numbers, List.empty, true)
+  }
+
 //  val input = Source.stdin.getLines().toList.map(Integer.parseInt)
 //  val nTimes = input.head
 //  val numbers = input.tail
