@@ -36,6 +36,19 @@ object Introduction extends App {
     go(numbers, List.empty, true)
   }
 
+  def fill(n: Int): List[Int] = {
+    @tailrec
+    def go(n: Int, acc: List[Int]): List[Int] = {
+      if (n < 0) acc else go(n - 1, n :: acc)
+    }
+
+    go(n - 1, List.empty)
+  }
+
+//  def readInt: Int = {
+//    scala.io.StdIn.readInt
+//  }
+
 //  val input = Source.stdin.getLines().toList.map(Integer.parseInt)
 //  val nTimes = input.head
 //  val numbers = input.tail
@@ -43,5 +56,5 @@ object Introduction extends App {
 //  println(f(nTimes, numbers))
 
   println(filterList(3, List(10, 9, 8, 2, 7, 5, 1, 3, 0)))
-
+  println(fill(3))
 }
