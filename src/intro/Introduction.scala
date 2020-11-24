@@ -45,6 +45,10 @@ object Introduction extends App {
     go(n - 1, List.empty)
   }
 
+  def abs(numbers: List[Int]): List[Int] = numbers map {
+    n => if (n < 0) -n else n
+  }
+
 //  def readInt: Int = {
 //    scala.io.StdIn.readInt
 //  }
