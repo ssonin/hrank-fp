@@ -8,8 +8,7 @@ object Perimeter extends App {
   type Point = (Int, Int)
   type Edge = (Point, Point)
 
-  val numPoints = StdIn.readInt()
-  val points = (0 until numPoints).map(_ => StdIn.readf2("{0} {1}") match {
+  val points = (0 until StdIn.readInt()).map(_ => StdIn.readf2("{0} {1}") match {
     case (x, y) => (x.toString.toInt, y.toString.toInt)
   })
   println(perimeter(points))
@@ -17,7 +16,7 @@ object Perimeter extends App {
 
   def perimeter(points: IndexedSeq[Point]): Double = {
     val edges = points.zipAll(points.tail, points.head, points.head)
-    edges.foldLeft(0.0){case (acc, (p0, p1)) => acc + distance(p0, p1)}
+    edges.foldLeft(0.0) { case (acc, (p0, p1)) => acc + distance(p0, p1) }
   }
 
   def distance(p0: Point, p1: Point): Double = (p0, p1) match {
