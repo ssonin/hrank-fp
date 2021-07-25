@@ -29,8 +29,8 @@ object Introduction extends App {
     def go(numbers: List[Int], acc: List[Int], keepHead: Boolean): List[Int] = {
       if (numbers.isEmpty) acc
       else {
-        if (keepHead) go(numbers.tail, numbers.head :: acc, false)
-        else go(numbers.tail, acc, true)
+        if (keepHead) go(numbers.tail, numbers.head :: acc, !keepHead)
+        else go(numbers.tail, acc, !keepHead)
       }
     }
 
