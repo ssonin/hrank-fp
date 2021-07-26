@@ -1,15 +1,15 @@
 package intro
 
-import intro.Perimeter.distance
+import intro.Polygon.{area, distance}
 import org.scalatest.matchers.should
 import org.scalatest.propspec.AnyPropSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
-class PerimeterSpec extends AnyPropSpec with ScalaCheckPropertyChecks with should.Matchers {
+class PolygonSpec extends AnyPropSpec with ScalaCheckPropertyChecks with should.Matchers {
 
-  property("Distance evaluation should produce correct results") {
+  property("Euclidean distance evaluation") {
     val distances = Table(
-      ("p0", "p0", "expectedDistance"),
+      ("p0", "p1", "expectedDistance"),
       ((0, 0), (0, 1), 1.0),
       ((1043, 770), (551, 990), 538.947),
       ((551, 990), (681, 463), 542.797),
@@ -30,6 +30,25 @@ class PerimeterSpec extends AnyPropSpec with ScalaCheckPropertyChecks with shoul
         if (x0 == x1 && y0 == y1) expectedDistance should equal(0.0)
         else expectedDistance > 0
       }
+    }
+  }
+
+  property("Polygon area evaluation") {
+    val polygons = Table(
+      ("points", "expectedArea"),
+      (IndexedSeq(
+        (458, 695),
+        (621, 483),
+        (877, 469),
+        (1035, 636),
+        (1061, 825),
+        (875, 1023),
+        (645, 1033),
+        (485, 853)),
+        255931.0)
+    )
+    forAll (polygons) { (points, expectedArea) =>
+      area(points) should equal (expectedArea)
     }
   }
 
