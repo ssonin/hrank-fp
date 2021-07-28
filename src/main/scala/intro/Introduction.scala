@@ -86,16 +86,6 @@ object Introduction extends App {
     (1 to n).foldLeft(BigInt(1)){ case (acc, i) => acc * i }
   }
 
-  def fibonacci(n: Int): Int = {
-    @tailrec
-    def go(n: Int, prev: Int, curr: Int): Int = {
-      if (n == 1) prev
-      else go(n - 1, curr, prev + curr)
-    }
-    require(n > 0)
-    go(n, 0, 1)
-  }
-
 //  def readInt: Int = {
 //    scala.io.StdIn.readInt
 //  }

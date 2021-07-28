@@ -1,11 +1,12 @@
-package intro
+package recursion
 
 import intro.Introduction.factorial
 import org.scalatest.matchers.should
 import org.scalatest.propspec.AnyPropSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+import recursion.StringCompression.compress
 
-class IntroductionSuite extends AnyPropSpec with ScalaCheckPropertyChecks with should.Matchers {
+class RecursionSuite extends AnyPropSpec with ScalaCheckPropertyChecks with should.Matchers {
 
   property("Factorial evaluation") {
     val input = Table(
@@ -23,5 +24,17 @@ class IntroductionSuite extends AnyPropSpec with ScalaCheckPropertyChecks with s
     }
   }
 
+  property("String compression") {
+    val input = Table(
+      ("s", "expected"),
+      ("abcaaabbb", "abca3b3"),
+      ("abcd", "abcd"),
+      ("aaabaaaaccaaaaba", "a3ba4c2a4ba"),
+      ("", "")
+    )
+    forAll (input) { (s: String, expected: String) =>
+      compress(s) should equal (expected)
+    }
+  }
 
 }
