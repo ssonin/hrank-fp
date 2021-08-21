@@ -12,11 +12,11 @@ object StringCompression {
   }
 
   def compress(s: String): String = {
-    delim.split(s).map(t => encode(t)).mkString
+    delim.split(s).map(encode).mkString
   }
 
-  def encode(token: String): String = token match {
-    case s if s.length < 2 => s
-    case s => s.head + s.length.toString
+  def encode(token: String): String = {
+    if (token.length < 2) token
+    else token.head + token.length.toString
   }
 }
