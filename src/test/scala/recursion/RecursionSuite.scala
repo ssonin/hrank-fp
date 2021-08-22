@@ -4,6 +4,7 @@ import intro.Introduction.factorial
 import org.scalatest.matchers.should
 import org.scalatest.propspec.AnyPropSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+import recursion.PascalTriangle.triangle
 import recursion.StringCompression.compress
 
 class RecursionSuite extends AnyPropSpec with ScalaCheckPropertyChecks with should.Matchers {
@@ -34,6 +35,20 @@ class RecursionSuite extends AnyPropSpec with ScalaCheckPropertyChecks with shou
     )
     forAll (input) { (s: String, expected: String) =>
       compress(s) should equal (expected)
+    }
+  }
+
+  property("Pascal triangle") {
+    val input = Table(
+      ("n", "expected"),
+      (1, Vector(Vector(1))),
+      (2, Vector(Vector(1), Vector(1, 1))),
+      (3, Vector(Vector(1), Vector(1, 1), Vector(1, 2, 1))),
+      (4, Vector(Vector(1), Vector(1, 1), Vector(1, 2, 1), Vector(1, 3, 3, 1))),
+      (5, Vector(Vector(1), Vector(1, 1), Vector(1, 2, 1), Vector(1, 3, 3, 1), Vector(1, 4, 6, 4, 1)))
+    )
+    forAll (input) { (n: Int, expected: Vector[Vector[Int]]) =>
+      triangle(n) should equal (expected)
     }
   }
 
