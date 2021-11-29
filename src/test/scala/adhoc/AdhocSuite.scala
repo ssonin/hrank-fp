@@ -1,6 +1,7 @@
 package adhoc
 
 import adhoc.JumpingBunnies.{gcd, lcm}
+import adhoc.RotateString.rotate
 import org.scalatest.matchers.should
 import org.scalatest.propspec.AnyPropSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
@@ -30,8 +31,23 @@ class AdhocSuite extends AnyPropSpec with ScalaCheckPropertyChecks with should.M
       (List(83, 75, 60, 37, 10, 26, 98, 15, 13, 22), BigInt("6455549100"))
     )
 
-    forAll(input) {(numbers: Iterable[Int], expected: BigInt) =>
+    forAll(input) { (numbers: Iterable[Int], expected: BigInt) =>
       lcm(numbers.map(BigInt(_))) should equal (expected)
+    }
+  }
+
+  property("Rotate string") {
+    val input = Table(
+      ("s", "n", "expected"),
+      ("abc", 5, Vector("bca", "cab", "abc")),
+      ("abcde", 5, Vector("bcdea", "cdeab", "deabc", "eabcd", "abcde")),
+      ("abab", 5, Vector("baba", "abab", "baba", "abab")),
+      ("aaa", 5, Vector("aaa", "aaa", "aaa")),
+      ("z", 5, Vector("z")),
+    )
+
+    forAll(input) { (s: String, n: Int, expected: Vector[String]) =>
+      rotate(s) should equal (expected)
     }
   }
 }
